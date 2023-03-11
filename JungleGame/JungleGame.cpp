@@ -57,6 +57,16 @@ int main()
     float scrollingForeFore = 0.0f;
 
     SetTargetFPS(60);
+    
+    // Loading chracter image
+    Texture2D scarfy = LoadTexture("charakter/scarfy.png");        // Texture loading
+
+    Vector2 position = { 380.0f, 200.0f };
+    Rectangle frameRec = { 0.0f, 0.0f, (float)scarfy.width / 6, (float)scarfy.height };
+    int currentFrame = 0;
+
+    int framesCounter = 0;
+    int framesSpeed = 8;
 
     ToggleFullscreen();
 
@@ -78,6 +88,19 @@ int main()
         if (scrollingFore <= -gameBg[0].width * 2) scrollingFore = 0;
         if (scrollingForeFore <= -gameBg[0].width * 2) scrollingForeFore = 0;
 
+        // Update character
+        //----------------------------------------------------------------------------------
+        framesCounter++;
+
+        if (framesCounter >= (60 / framesSpeed))
+        {
+            framesCounter = 0;
+            currentFrame++;
+
+            if (currentFrame > 5) currentFrame = 0;
+
+            frameRec.x = (float)currentFrame * (float)scarfy.width / 6;
+        }
         // Draw
         BeginDrawing();
 
