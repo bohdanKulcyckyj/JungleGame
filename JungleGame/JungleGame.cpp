@@ -4,7 +4,9 @@
 
 #include "raylib.h"
 
+
 using namespace std;
+
 
 vector <Texture2D> loadBackgroudLayers(vector<string> paths, int w, int h) {
     vector<Texture2D> backgroundLayers;
@@ -23,6 +25,7 @@ vector <Texture2D> loadBackgroudLayers(vector<string> paths, int w, int h) {
 
     return backgroundLayers;
 }
+
 
 
 int main()
@@ -49,6 +52,7 @@ int main()
     backgroundPaths.push_back("./resources/Layer_0010_1.png");
     backgroundPaths.push_back("./resources/Layer_0011_0.png");
 
+
     reverse(backgroundPaths.begin(), backgroundPaths.end());
 
     float scrollingBack = 0.0f;
@@ -56,7 +60,7 @@ int main()
     float scrollingFore = 0.0f;
     float scrollingForeFore = 0.0f;
 
-    SetTargetFPS(60);
+    SetTargetFPS(250);
 
     ToggleFullscreen();
 
@@ -66,17 +70,33 @@ int main()
     //game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
-        // Update
-        scrollingBack -= 0.1f;
-        scrollingMid -= 0.5f;
-        scrollingFore -= 1.0f;
-        scrollingForeFore -= 1.2f;
+        //Control
+        if (IsKeyDown(KEY_D)) {
+            scrollingBack -= 0.1f;
+            scrollingMid -= 0.5f;
+            scrollingFore -= 1.0f;
+            scrollingForeFore -= 1.2f;
 
-        // NOTE: Texture is scaled twice its size, so it sould be considered on scrolling
-        if (scrollingBack <= -gameBg[0].width * 2) scrollingBack = 0;
-        if (scrollingMid <= -gameBg[0].width * 2) scrollingMid = 0;
-        if (scrollingFore <= -gameBg[0].width * 2) scrollingFore = 0;
-        if (scrollingForeFore <= -gameBg[0].width * 2) scrollingForeFore = 0;
+            // NOTE: Texture is scaled twice its size, so it sould be considered on scrolling
+            if (scrollingBack <= -gameBg[0].width * 2) scrollingBack = 0;
+            if (scrollingMid <= -gameBg[0].width * 2) scrollingMid = 0;
+            if (scrollingFore <= -gameBg[0].width * 2) scrollingFore = 0;
+            if (scrollingForeFore <= -gameBg[0].width * 2) scrollingForeFore = 0;
+        }
+
+        if (IsKeyDown(KEY_A)) {
+            scrollingBack += 0.1f;
+            scrollingMid += 0.5f;
+            scrollingFore += 1.0f;
+            scrollingForeFore += 1.2f;
+
+            // NOTE: Texture is scaled twice its size, so it sould be considered on scrolling
+            if (scrollingBack >= +gameBg[0].width * 2) scrollingBack = 0;
+            if (scrollingMid >= +gameBg[0].width * 2) scrollingMid = 0;
+            if (scrollingFore >= +gameBg[0].width * 2) scrollingFore = 0;
+            if (scrollingForeFore >= +gameBg[0].width * 2) scrollingForeFore = 0;
+
+        }
 
         // Draw
         BeginDrawing();
@@ -106,8 +126,14 @@ int main()
             }
 
 
+            //Left
+            DrawTextureEx(gameBg[i], { speed - gameBg[i].width * 2, ((float)GetScreenHeight() * (-1.0f)) }, 0.0f, 2.0f, WHITE);
+            //Mid
             DrawTextureEx(gameBg[i], { speed, ((float)GetScreenHeight() * (-1.0f)) }, 0.0f, 2.0f, WHITE);
+            //Right
             DrawTextureEx(gameBg[i], { gameBg[i].width * 2 + speed, ((float)GetScreenHeight() * (-1.0f)) }, 0.0f, 2.0f, WHITE);
+
+
         }
 
         DrawText("Jungle Game", 10, 10, 40, RAYWHITE);
