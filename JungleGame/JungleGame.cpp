@@ -1,32 +1,12 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include "AssetsLoader.h";
+#include "Background.h";
 
 #include "raylib.h"
 
-
 using namespace std;
-
-
-vector <Texture2D> loadBackgroudLayers(vector<string> paths, int w, int h) {
-    vector<Texture2D> backgroundLayers;
-    Image tmp;
-
-    for (string path : paths) {
-        //load image from path
-        tmp = LoadImage(path.c_str()); //c_str for conversion sting to const char*
-
-        //resize image
-        ImageResize(&tmp, w, h);
-
-        //load texture from image & push to vector
-        backgroundLayers.push_back(LoadTextureFromImage(tmp));
-    }
-
-    return backgroundLayers;
-}
-
-
 
 int main()
 
@@ -38,22 +18,9 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "My First Game");
 
-    vector<string> backgroundPaths;
-    backgroundPaths.push_back("./resources/Layer_0000_9.png");
-    backgroundPaths.push_back("./resources/Layer_0001_8.png");
-    backgroundPaths.push_back("./resources/Layer_0002_7.png");
-    backgroundPaths.push_back("./resources/Layer_0003_6.png");
-    backgroundPaths.push_back("./resources/Layer_0004_Lights.png");
-    backgroundPaths.push_back("./resources/Layer_0005_5.png");
-    backgroundPaths.push_back("./resources/Layer_0006_4.png");
-    backgroundPaths.push_back("./resources/Layer_0007_Lights.png");
-    backgroundPaths.push_back("./resources/Layer_0008_3.png");
-    backgroundPaths.push_back("./resources/Layer_0009_2.png");
-    backgroundPaths.push_back("./resources/Layer_0010_1.png");
-    backgroundPaths.push_back("./resources/Layer_0011_0.png");
 
 
-    reverse(backgroundPaths.begin(), backgroundPaths.end());
+    //reverse(backgroundPaths.begin(), backgroundPaths.end());
 
     float scrollingBack = 0.0f;
     float scrollingMid = 0.0f;
@@ -64,7 +31,9 @@ int main()
 
     ToggleFullscreen();
 
-    vector<Texture2D> gameBg = loadBackgroudLayers(backgroundPaths, GetScreenWidth(), GetScreenHeight());
+    Background* testBg = new Background("./resources/jungle-background");
+
+    vector<Texture2D> gameBg = testBg->getBackgroundLayers();
     //--------------------------------------------------------------------------------------
 
     //game loop
