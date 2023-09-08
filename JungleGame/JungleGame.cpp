@@ -68,11 +68,6 @@ int main()
         }
 
         // Draw background images
-        // NOTE: Texture is scaled twice its size
-        /*for (int i = 0; i < gameBg.size(); i++) {
-            
-            DrawTextureEx(gameBg[i], { (float)(GetScreenWidth()) / 2.0f - gameBg[i].width, (float)GetScreenHeight()* (-1.0f) }, 0.0f, 2.0f, WHITE);
-        }*/
         testBg->DrawBackground();
 
         DrawText("Jungle Game", 10, 10, 40, RAYWHITE);
