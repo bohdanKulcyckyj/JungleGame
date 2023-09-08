@@ -20,5 +20,7 @@ public:
 	int getLayerHeight();
 
 	void loadLayersTextures(vector<string> paths);
+
+	void DrawBackground();
 };
 

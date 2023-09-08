@@ -37,6 +37,14 @@ void Background::loadLayersTextures(vector<string> paths) {
     this->backgroundLayers = backgroundLayers;
 }
 
+void Background::DrawBackground()
+{
+    for (int i = 0; i < this->backgroundLayers.size(); i++) {
+
+        DrawTextureEx(this->backgroundLayers[i], { (float)(GetScreenWidth()) / 2.0f - this->backgroundLayers[i].width, (float)GetScreenHeight() * (-1.0f) }, 0.0f, 2.0f, WHITE);
+    }
+}
+
 vector<Texture2D> Background::getBackgroundLayers() {
     return this->backgroundLayers;
 }

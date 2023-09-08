@@ -18,14 +18,7 @@ int main()
 
     InitWindow(screenWidth, screenHeight, "My First Game");
 
-
-
     //reverse(backgroundPaths.begin(), backgroundPaths.end());
-
-    float scrollingBack = 0.0f;
-    float scrollingMid = 0.0f;
-    float scrollingFore = 0.0f;
-    float scrollingForeFore = 0.0f;
 
     SetTargetFPS(250);
 
@@ -40,7 +33,7 @@ int main()
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
         //Control
-        if (IsKeyDown(KEY_D)) {
+        /*if (IsKeyDown(KEY_D)) {
             scrollingBack -= 0.1f;
             scrollingMid -= 0.5f;
             scrollingFore -= 1.0f;
@@ -65,7 +58,7 @@ int main()
             if (scrollingFore >= +gameBg[0].width * 2) scrollingFore = 0;
             if (scrollingForeFore >= +gameBg[0].width * 2) scrollingForeFore = 0;
 
-        }
+        }*/
 
         // Draw
         BeginDrawing();
@@ -74,36 +67,13 @@ int main()
             ToggleFullscreen();
         }
 
-        //ClearBackground(GetColor(0xffffff));
-
-        // Draw background image twice
+        // Draw background images
         // NOTE: Texture is scaled twice its size
-        for (int i = 0; i < gameBg.size(); i++) {
-            float speed;
-
-            if (i < 3) {
-                speed = scrollingBack;
-            }
-            else if (i < 6) {
-                speed = scrollingMid;
-            }
-            else if (i == 12) {
-                speed = scrollingForeFore;
-            }
-            else {
-                speed = scrollingFore;
-            }
-
-
-            //Left
-            DrawTextureEx(gameBg[i], { speed - gameBg[i].width * 2, ((float)GetScreenHeight() * (-1.0f)) }, 0.0f, 2.0f, WHITE);
-            //Mid
-            DrawTextureEx(gameBg[i], { speed, ((float)GetScreenHeight() * (-1.0f)) }, 0.0f, 2.0f, WHITE);
-            //Right
-            DrawTextureEx(gameBg[i], { gameBg[i].width * 2 + speed, ((float)GetScreenHeight() * (-1.0f)) }, 0.0f, 2.0f, WHITE);
-
-
-        }
+        /*for (int i = 0; i < gameBg.size(); i++) {
+            
+            DrawTextureEx(gameBg[i], { (float)(GetScreenWidth()) / 2.0f - gameBg[i].width, (float)GetScreenHeight()* (-1.0f) }, 0.0f, 2.0f, WHITE);
+        }*/
+        testBg->DrawBackground();
 
         DrawText("Jungle Game", 10, 10, 40, RAYWHITE);
         DrawText("Made by Behdon", GetScreenWidth() - 200, GetScreenHeight() - 50, 10, RAYWHITE);

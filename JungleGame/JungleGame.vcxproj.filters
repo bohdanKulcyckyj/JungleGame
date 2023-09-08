@@ -32,9 +32,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="GameClient.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
@@ -47,5 +44,8 @@
     <ClInclude Include="AssetsLoader.h">
       <Filter>Hlavičkové soubory</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
